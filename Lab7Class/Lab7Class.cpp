@@ -53,7 +53,7 @@ public:
             cout << "Su saldo inicial es Q" << fixed << setprecision(2) << saldo << endl <<
                 "La cantidad a retirar es: Q" << monto << endl;
             saldo -= monto;
-            cout << "Su nuevo saldo es: Q" << endl;
+            cout << "Su nuevo saldo es: Q" <<saldo<< endl;
         }
 
         //Condicion: Si el saldo cae por debajo de 100, mostrar una advertencia.
@@ -71,8 +71,10 @@ public:
     void mostrarInfo() {
         
         if (activa == 1) {
+            //\033[92m utilizado para cambiar el color del texto
             cout << "\033[92m";
-            cout << "Nombre: " << titular << endl <<
+            cout <<"ID: "<<id<<endl<<
+                "Nombre: " << titular << endl <<
                 "Saldo: Q" << saldo << endl <<
                 "Estado: "<<endl<<
                 "Activa"<<endl;
@@ -98,37 +100,38 @@ int main()
 
 
     CuentasBancarias c1(1, "Kenneth", 1200.23, true, 0);
-    CuentasBancarias c2(2, "Allison", 700, false, 0);
+    CuentasBancarias c2(2, "Allison", 700, true, 0);
     CuentasBancarias c3(3, "Fleur", 26900, true, 0); 
     CuentasBancarias c4(4, "Hemlock", 1500, true, 0);
     CuentasBancarias c5(5, "Sly", 300, true, 0);
     CuentasBancarias c6(6, "Aeon", 10500, true, 0);
-    CuentasBancarias c7(7, "Marta", 5800, true, 0);
-    CuentasBancarias c8(8, "Eduardo", 16000, true, 0);
-    CuentasBancarias c9(9, "Lucía", 950, true, 0);
-    CuentasBancarias c10(10, "Juan", 2000, true, 0);
-    CuentasBancarias c11(11, "Laura", 2400, true, 0);
-    CuentasBancarias c12(12, "Tomás", 12000, true, 0);
-    CuentasBancarias c13(13, "Raquel", 3000, true, 0);
-    CuentasBancarias c14(14, "Pedro", 11000, true, 0);
-    CuentasBancarias c15(15, "Verónica", 1450, true, 0);
-    CuentasBancarias c16(16, "Luis", 800, false, 0);
-    CuentasBancarias c17(17, "Sofía", 500, true, 0);
-    CuentasBancarias c18(18, "Fernando", 2200, true, 0);
-    CuentasBancarias c19(19, "Victoria", 1800, true, 0);
-    CuentasBancarias c20(20, "José", 1700, true, 0);
-    CuentasBancarias c21(21, "Elena", 1350, true, 0);
-    CuentasBancarias c22(22, "Antonio", 15500, true, 0);
-    CuentasBancarias c23(23, "Isabel", 250, true, 0);
-    CuentasBancarias c24(24, "José Luis", 12500, true, 0);
-    CuentasBancarias c25(25, "María", 9000, true, 0);
-    CuentasBancarias c26(26, "Rosa", 7400, true, 0);
-    CuentasBancarias c27(27, "Ricardo", 4200, true, 0);
-    CuentasBancarias c28(28, "Antonio", 3600, true, 0);
-    CuentasBancarias c29(29, "Carmen", 1500, true, 0);
-    CuentasBancarias c30(30, "Héctor", 1300, true, 0);
+    CuentasBancarias c7(7, "Nyx", 5800.75, true, 0);
+    CuentasBancarias c8(8, "Orfeo", 16000.50, true, 0);
+    CuentasBancarias c9(9, "Selene", 950.20, true, 0);
+    CuentasBancarias c10(10, "Ares", 2000.99, true, 0);
+    CuentasBancarias c11(11, "Eos", 2400.35, true, 0);
+    CuentasBancarias c12(12, "Cronos", 12000.10, true, 0);
+    CuentasBancarias c13(13, "Hecate", 3000.45, true, 0);
+    CuentasBancarias c14(14, "Zeus", 11000.80, true, 0);
+    CuentasBancarias c15(15, "Clio", 1450.25, true, 0);
+    CuentasBancarias c16(16, "Morfeo", 800.99, false, 0);
+    CuentasBancarias c17(17, "Iris", 500.30, true, 0);
+    CuentasBancarias c18(18, "Dionisio", 2200.75, true, 0);
+    CuentasBancarias c19(19, "Hestia", 1800.60, true, 0);
+    CuentasBancarias c20(20, "Hades", 1700.40, true, 0);
+    CuentasBancarias c21(21, "Medusa", 1350.85, true, 0);
+    CuentasBancarias c22(22, "Apolo", 15500.99, true, 0);
+    CuentasBancarias c23(23, "Persefone", 250.15, true, 0);
+    CuentasBancarias c24(24, "Helios", 12500.20, true, 0);
+    CuentasBancarias c25(25, "Atenea", 9000.95, true, 0);
+    CuentasBancarias c26(26, "Artemisa", 7400.50, true, 0);
+    CuentasBancarias c27(27, "Hermes", 4200.33, true, 0);
+    CuentasBancarias c28(28, "Poseidon", 3600.75, true, 0);
+    CuentasBancarias c29(29, "Nemesis", 1500.25, true, 0);
+    CuentasBancarias c30(30, "Hercules", 1300.10, true, 0);
 
     do {
+
         cout << "\033[97m" << endl;
         cout << setfill('-') << setw(30) << "-"<<endl;
 
@@ -318,6 +321,7 @@ int main()
             break;
 
         default:
+            cout << "Selecciona una opcion del menu." << endl;
             break;
 
         }
