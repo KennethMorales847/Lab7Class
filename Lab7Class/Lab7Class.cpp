@@ -83,9 +83,9 @@ int main()
     CuentasBancarias c1(1, "Kenneth", 1200, true, 0);
     CuentasBancarias c2(2, "Allison", 700, true, 0);
     CuentasBancarias c3(3, "Fleur", 26900, true, 0); 
-    CuentasBancarias c4(4, "Carlos", 1500, true, 0);
-    CuentasBancarias c5(5, "Beatriz", 300, true, 0);
-    CuentasBancarias c6(6, "David", 10500, true, 0);
+    CuentasBancarias c4(4, "Hemlock", 1500, true, 0);
+    CuentasBancarias c5(5, "Sly", 300, true, 0);
+    CuentasBancarias c6(6, "Aeon", 10500, true, 0);
     CuentasBancarias c7(7, "Marta", 5800, true, 0);
     CuentasBancarias c8(8, "Eduardo", 16000, true, 0);
     CuentasBancarias c9(9, "Lucía", 950, true, 0);
