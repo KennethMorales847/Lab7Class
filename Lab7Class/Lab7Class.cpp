@@ -1,6 +1,6 @@
 #include <string>
 #include <iostream>
-#include<cstdlib>
+#include <iomanip>
 
 using namespace std;
 
@@ -17,15 +17,22 @@ public:
         id(_id), titular(_titular), saldo(_saldo), activa(_activa), intentosFallidos() { }
 
     void depositar(double monto) {
-        cout << "Su saldo inicial es Q" << saldo << endl<<
-            "La cantidad a depositar es: Q"<<monto<<endl;
-        saldo += monto;
-        cout << "Su nuevo saldo es: Q" << saldo<<endl;
+        //Condicion: No se pueden hacer depositos si la cuenta está bloqueada.
+
+        if (activa != true) {
+            cout << "La cuenta esta bloqueada. Contacta a un representante para desbloquearla." << endl;
+        }
+        else {
+            cout << "Su saldo inicial es Q" << fixed << setprecision(2) << saldo << endl <<
+                "La cantidad a depositar es: Q"  << monto << endl;
+            saldo += monto;
+            cout << "Su nuevo saldo es: Q"  << saldo << endl;
+        }
+        
     }
 
     void retirar (double monto) {
-        cout << "Su saldo inicial es Q" << saldo << endl <<
-            "La cantidad a retirar es: Q" << monto << endl;
+        
 
        //Condicion: No se pueden hacer retiros si la cuenta está bloqueada.
         if (activa != true) {
@@ -36,15 +43,17 @@ public:
         else if (monto > saldo || monto<= 0) {
             intentosFallidos += 1;
             cout << "No puedes retirar esa cantidad, intenta de nuevo." << endl
-                <<"Intentos fallidos: "<<intentosFallidos<<endl;
+                <<"Intentos fallidos: "<<intentosFallidos<<". Si llega a tres intentos fallidos, la cuenta sera bloqueada." << endl;
             //Condicion: Si hay 3 intentos fallidos de retiro, la cuenta se bloquea
             if (intentosFallidos >= 3) {
                 activa = false;
             }
         }
         else {
+            cout << "Su saldo inicial es Q" << fixed << setprecision(2) << saldo << endl <<
+                "La cantidad a retirar es: Q" << monto << endl;
             saldo -= monto;
-            cout << "Su nuevo saldo es: Q" << saldo << endl;
+            cout << "Su nuevo saldo es: Q" << endl;
         }
 
         //Condicion: Si el saldo cae por debajo de 100, mostrar una advertencia.
@@ -60,14 +69,22 @@ public:
     }
 
     void mostrarInfo() {
-        cout << "Nombre: " << titular << endl <<
-            "Saldo: Q" << saldo << endl <<
-            "Estado: ";
+        
         if (activa == 1) {
-            cout << "Activa";
+            cout << "\033[92m";
+            cout << "Nombre: " << titular << endl <<
+                "Saldo: Q" << saldo << endl <<
+                "Estado: "<<endl<<
+                "Activa"<<endl;
+            cout << "\033[0m";
         }
         else {
-            cout << "Bloqueada";
+            cout << "\033[91m";
+            cout << "Nombre: " << titular << endl <<
+                "Saldo: Q" << saldo << endl <<
+                "Estado: " << endl <<
+                "Bloqueada" << endl;
+            cout << "\033[0m";
         }
         cout << endl;
     }
@@ -80,8 +97,8 @@ int main()
     float depos, ret;
 
 
-    CuentasBancarias c1(1, "Kenneth", 1200, true, 0);
-    CuentasBancarias c2(2, "Allison", 700, true, 0);
+    CuentasBancarias c1(1, "Kenneth", 1200.23, true, 0);
+    CuentasBancarias c2(2, "Allison", 700, false, 0);
     CuentasBancarias c3(3, "Fleur", 26900, true, 0); 
     CuentasBancarias c4(4, "Hemlock", 1500, true, 0);
     CuentasBancarias c5(5, "Sly", 300, true, 0);
@@ -95,7 +112,7 @@ int main()
     CuentasBancarias c13(13, "Raquel", 3000, true, 0);
     CuentasBancarias c14(14, "Pedro", 11000, true, 0);
     CuentasBancarias c15(15, "Verónica", 1450, true, 0);
-    CuentasBancarias c16(16, "Luis", 800, true, 0);
+    CuentasBancarias c16(16, "Luis", 800, false, 0);
     CuentasBancarias c17(17, "Sofía", 500, true, 0);
     CuentasBancarias c18(18, "Fernando", 2200, true, 0);
     CuentasBancarias c19(19, "Victoria", 1800, true, 0);
@@ -112,18 +129,30 @@ int main()
     CuentasBancarias c30(30, "Héctor", 1300, true, 0);
 
     do {
-        cout <<endl<<
-            "---Menu---" << endl <<
-            "1. Depositar" << endl <<
-            "2. Retirar" << endl <<
-            "3. Consultar Saldo" << endl <<
-            "4. Ver todas las cuentas" << endl <<
-            "0. Salir" << endl;
+        cout << "\033[97m" << endl;
+        cout << setfill('-') << setw(30) << "-"<<endl;
 
+
+        cout << setfill(' ') << setw(17) << "MENU"  << " " << endl;
+
+        cout << setfill('-') << setw(30) << "-" << endl;
+
+        cout << setfill(' ')
+            
+            <<setw(4)<< " "<< "\033[95m 1. Depositar\033[0m" << endl;
+        cout << setw(4) << " " << "\033[96m 2. Retirar\033[0m" << endl;
+        cout << setw(4) << " " << "\033[94m 3. Consultar Saldo\033[0m" << endl;
+        cout << setw(4) << " " << "\033[92m 4. Ver todas las cuentas\033[0m" << endl;
+        cout << setw(4) << " " << "\033[93m 0. Salir\033[0m" << endl;
+
+        cout << setfill('-') << setw(30) << "-" << endl;
+        
         cin >> opcion;
+        cout << "\033[0m";
 
         switch (opcion) {
         case 1:
+            cout << "\033[95m" << endl;
             ID = 0;
             cout << "Escribe el ID de la cuenta a depositar: "; cin >> ID;
             cout << "Escribe la cantidad a depositar: "; cin >> depos;
@@ -161,11 +190,13 @@ int main()
             case 30: c30.depositar(depos); break;
             default:
                 cout << "Ingresa un ID de cuenta valido" << endl;
+                cout << "\033[0m";
                 break;
             }
 
             break;
         case 2:
+            cout << "\033[96m" << endl;
             ID = 0;
             cout << "Escribe el ID de la cuenta a retirar: "; cin >> ID;
             cout << "Escribe la cantidad a retirar: "; cin >> ret;
@@ -205,9 +236,11 @@ int main()
                 cout << "Ingresa un ID de cuenta valido" << endl;
                 break;
             }
+            cout << "\033[0m";
             break;
 
         case 3: 
+            cout << "\033[94m" << endl;
             ID = 0;
             cout << "Escribe el ID de la cuenta a consultar: "; cin >> ID;
             switch (ID) {
@@ -245,10 +278,11 @@ int main()
                 cout << "Ingresa un ID de cuenta valido" << endl;
                 break;
             }
-
+            cout << "\033[0m";
             break;
 
         case 4:
+            
             c1.mostrarInfo();
             c2.mostrarInfo();
             c3.mostrarInfo();
@@ -279,6 +313,8 @@ int main()
             c28.mostrarInfo();
             c29.mostrarInfo();
             c30.mostrarInfo();
+            
+
             break;
 
         default:
