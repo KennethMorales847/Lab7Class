@@ -82,7 +82,8 @@ public:
         }
         else {
             cout << "\033[91m";
-            cout << "Nombre: " << titular << endl <<
+            cout << "ID: " << id << endl << 
+                "Nombre: " << titular << endl <<
                 "Saldo: Q" << saldo << endl <<
                 "Estado: " << endl <<
                 "Bloqueada" << endl;
